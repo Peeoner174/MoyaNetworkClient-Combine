@@ -9,11 +9,18 @@
 import Foundation
 
 public enum ProviderError: Error {
+    // response status
     case invalidServerResponseWithStatusCode(statusCode: Int)
     case invalidServerResponse
     case missingBodyData
-    case failedToDecodeImage
+    
+    // decode
     case decodingError(Error)
+    case serializationError(toType: String)
+    case bodyResponseNotContaint(keyPath: String)
+    case failedToDecodeImage
+    
+    // connection
     case connectionError(Error)
     case underlying(Error)
 }
@@ -35,6 +42,10 @@ public extension ProviderError {
             return "No body data provided from the server"
         case .failedToDecodeImage:
             return "the body doesn't contain a valid data."
+        case .serializationError(let type):
+            return "Failed serialization type: \(type)"
+        case .bodyResponseNotContaint(let keyPath):
+            return "Response JSON not contain value by key path: \(keyPath)"
         }
     }
 }

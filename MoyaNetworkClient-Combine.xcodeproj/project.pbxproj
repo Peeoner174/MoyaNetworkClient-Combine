@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E7EC079247D17E700FC2028 /* Dictionary+KeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7EC078247D17E700FC2028 /* Dictionary+KeyPath.swift */; };
 		6EACF384247C4D96006963A0 /* MoyaNetworkClient_Combine.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EACF382247C4D96006963A0 /* MoyaNetworkClient_Combine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EACF38C247C4E10006963A0 /* URL+GenerateURLQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EACF38B247C4E10006963A0 /* URL+GenerateURLQuery.swift */; };
 		6EACF38E247C4E24006963A0 /* HttpUrlResponse+IsSuccesful.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EACF38D247C4E24006963A0 /* HttpUrlResponse+IsSuccesful.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E7EC078247D17E700FC2028 /* Dictionary+KeyPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+KeyPath.swift"; sourceTree = "<group>"; };
 		6EACF37F247C4D96006963A0 /* MoyaNetworkClient_Combine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MoyaNetworkClient_Combine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EACF382247C4D96006963A0 /* MoyaNetworkClient_Combine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoyaNetworkClient_Combine.h; sourceTree = "<group>"; };
 		6EACF383247C4D96006963A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,6 +55,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E7EC077247D179C00FC2028 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6EACF38A247C4DE5006963A0 /* Extension */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		6EACF375247C4D96006963A0 = {
 			isa = PBXGroup;
 			children = (
@@ -72,9 +82,9 @@
 		6EACF381247C4D96006963A0 /* MoyaNetworkClient-Combine */ = {
 			isa = PBXGroup;
 			children = (
+				6E7EC077247D179C00FC2028 /* Helpers */,
 				6EACF3A5247C5199006963A0 /* ResponseModels */,
 				6EACF3A4247C5189006963A0 /* RequestModels */,
-				6EACF38A247C4DE5006963A0 /* Extension */,
 				6EACF382247C4D96006963A0 /* MoyaNetworkClient_Combine.h */,
 				6EACF383247C4D96006963A0 /* Info.plist */,
 				6EACF3A0247C510A006963A0 /* NetworkTarget.swift */,
@@ -86,6 +96,7 @@
 		6EACF38A247C4DE5006963A0 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				6E7EC078247D17E700FC2028 /* Dictionary+KeyPath.swift */,
 				6EACF38B247C4E10006963A0 /* URL+GenerateURLQuery.swift */,
 				6EACF38D247C4E24006963A0 /* HttpUrlResponse+IsSuccesful.swift */,
 			);
@@ -221,6 +232,7 @@
 			files = (
 				6EACF39F247C5012006963A0 /* ParameterEncoding.swift in Sources */,
 				6EACF39D247C4FFB006963A0 /* Task.swift in Sources */,
+				6E7EC079247D17E700FC2028 /* Dictionary+KeyPath.swift in Sources */,
 				6EACF38E247C4E24006963A0 /* HttpUrlResponse+IsSuccesful.swift in Sources */,
 				6EACF393247C4EA3006963A0 /* ContentType.swift in Sources */,
 				6EACF3A7247C51B2006963A0 /* Response.swift in Sources */,

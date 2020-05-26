@@ -45,7 +45,21 @@ public final class NetworkClient {
             if !httpResponse.isSuccessful {
                 throw ProviderError.invalidServerResponseWithStatusCode(statusCode: httpResponse.statusCode)
             }
-            return data
+            
+            if let keyPath = target.keyPath {
+                guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] else {
+                    throw ProviderError.serializationError(toType: "JSON")
+                }
+                guard let _ = json[dict: DictionaryKeyPath(keyPath)] else {
+                    throw ProviderError.bodyResponseNotContaint(keyPath: keyPath)
+                }
+                guard let dataAtKeyPath = try? JSONSerialization.data(withJSONObject: json[keyPath]!, options: []) else {
+                    throw ProviderError.serializationError(toType: "Data")
+                }
+                return dataAtKeyPath
+            } else {
+                return data
+            }
         }
         .decode(type: type.self, decoder: jsonDecoder).mapError { error in
             if let error = error as? ProviderError {
@@ -82,7 +96,21 @@ public final class NetworkClient {
             if !httpResponse.isSuccessful {
                 throw ProviderError.invalidServerResponseWithStatusCode(statusCode: httpResponse.statusCode)
             }
-            return data
+            
+            if let keyPath = target.keyPath {
+                guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] else {
+                    throw ProviderError.serializationError(toType: "JSON")
+                }
+                guard let _ = json[dict: DictionaryKeyPath(keyPath)] else {
+                    throw ProviderError.bodyResponseNotContaint(keyPath: keyPath)
+                }
+                guard let dataAtKeyPath = try? JSONSerialization.data(withJSONObject: json[keyPath]!, options: []) else {
+                    throw ProviderError.serializationError(toType: "Data")
+                }
+                return dataAtKeyPath
+            } else {
+                return data
+            }
         }
         .decode(type: type.self, decoder: jsonDecoder).mapError { error in
             if let error = error as? ProviderError {
@@ -116,3 +144,4 @@ private extension NetworkClient {
         return request
     }
 }
+
