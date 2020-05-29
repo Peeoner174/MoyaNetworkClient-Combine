@@ -50,10 +50,10 @@ public final class NetworkClient {
                 guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] else {
                     throw ProviderError.serializationError(toType: "JSON")
                 }
-                guard let _ = json[dict: DictionaryKeyPath(keyPath)] else {
+                guard let jsonObject = json[dict: DictionaryKeyPath(keyPath)] else {
                     throw ProviderError.bodyResponseNotContaint(keyPath: keyPath)
                 }
-                guard let dataAtKeyPath = try? JSONSerialization.data(withJSONObject: json[keyPath]!, options: []) else {
+                guard let dataAtKeyPath = try? JSONSerialization.data(withJSONObject: jsonObject, options: []) else {
                     throw ProviderError.serializationError(toType: "Data")
                 }
                 return dataAtKeyPath
@@ -166,4 +166,3 @@ private extension NetworkClient {
         return request
     }
 }
-
