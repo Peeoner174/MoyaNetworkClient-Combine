@@ -25,3 +25,7 @@ public protocol NetworkTarget {
     /// Used to parse Codable on this key.
     var keyPath: String? { get }
 }
+
+public extension NetworkTarget {
+    var keyPath: String? { nil }
+}

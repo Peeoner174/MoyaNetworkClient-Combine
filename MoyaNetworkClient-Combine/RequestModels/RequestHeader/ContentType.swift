@@ -13,11 +13,11 @@ public enum ContentType: RequestHeader {
     case urlFormEncoded
     case multipartFormData
     
-    var name: String {
+    public var name: String {
         return "Content-Type"
     }
     
-    var content: String {
+    public var content: String {
         switch self {
         case .applicationJson:
             return "application/json"

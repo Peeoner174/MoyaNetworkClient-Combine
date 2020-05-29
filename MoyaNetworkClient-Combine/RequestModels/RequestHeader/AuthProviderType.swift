@@ -12,11 +12,11 @@ public enum AuthProviderType: RequestHeader {
     case bearer(token: String)
     case basic(username: String, password: String)
     
-    var name: String {
+    public var name: String {
         return "Authorization"
     }
     
-    var content: String {
+    public var content: String {
         switch self {
         case .basic(username: let username, password: let password):
             let loginString = String(format: "%@:%@", username, password)

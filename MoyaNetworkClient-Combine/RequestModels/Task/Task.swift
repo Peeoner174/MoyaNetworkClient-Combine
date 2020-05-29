@@ -11,9 +11,9 @@ import Foundation
 public typealias RequestBody = (parameters: [String : Any], encodingType: ParameterEncoding)
 
 public enum Task {
-    case requestPlain(urlParameters: [String: Any]?)
-    case requestData(data: Data, urlParameters: [String: Any]?)
-    case requestParameters(requestBody: RequestBody?, urlParameters: [String: Any]?)
+    case requestPlain(urlParameters: [String: Any]? = nil)
+    case requestData(data: Data, urlParameters: [String: Any]? = nil)
+    case requestParameters(requestBody: RequestBody?, urlParameters: [String: Any]? = nil)
 }
 
 extension Task {
@@ -33,17 +33,26 @@ extension Task {
         case .requestData(data: let data, urlParameters: _):
             return data
         case .requestParameters(requestBody: let requestBody, urlParameters: _):
-            guard let requestBody = requestBody else { return nil }
+            guard
+                let requestBody = requestBody,
+                let json = try? JSONSerialization.data(withJSONObject: requestBody.parameters, options: .withoutEscapingSlashes)
+                else {
+                    return nil
+            }
+            
             switch requestBody.encodingType {
             case .json:
-                return try? JSONSerialization.data(withJSONObject: requestBody.parameters, options: .prettyPrinted)
+                return json
             case .urlEncode:
-                var requestBodyComponents = URLComponents()
-                requestBodyComponents.queryItems = requestBody.parameters.reduce(into: []) { (result, element) in
-                    result.append(URLQueryItem(name: element.key, value: element.value as? String))
-                }
-                return requestBodyComponents.query?.data(using: .utf8)
+                return String(data: json, encoding: .utf8)?.addingPercentEncoding(withAllowedCharacters: .httpBodyAllowed)?.data(using: .utf8)
             }
         }
+    }
+}
+
+
+extension CharacterSet {
+    public static var httpBodyAllowed: CharacterSet {
+        return CharacterSet(charactersIn: " ^!*'();:@&=+$,/?%#[]")
     }
 }

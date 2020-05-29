@@ -122,6 +122,28 @@ public final class NetworkClient {
     }
 }
 
+// MARK: - Public Extensions
+
+public extension NetworkClient {
+    func request<D>(
+        _ target: NetworkTarget,
+        urlSession: URLSession = URLSession.shared,
+        class type: D.Type
+    ) -> AnyPublisher<D, ProviderError> where D: Decodable {
+        return request(target, scheduler: DispatchQueue.global(), class: type)
+    }
+    
+    func request<D, S>(
+        _ target: NetworkTarget,
+        class type: D.Type,
+        urlSession: URLSession = URLSession.shared,
+        jsonDecoder: JSONDecoder = .init(),
+        subscriber: S
+    ) where S: Subscriber, D: Decodable, S.Input == D, S.Failure == ProviderError {
+        return request(target, class: type, urlSession: urlSession, jsonDecoder: jsonDecoder, scheduler: DispatchQueue.global(), subscriber: subscriber)
+    }
+}
+
 // MARK: - Private Extensions
 
 private extension NetworkClient {

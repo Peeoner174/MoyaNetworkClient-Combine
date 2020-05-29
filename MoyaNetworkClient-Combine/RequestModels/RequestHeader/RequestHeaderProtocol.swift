@@ -8,14 +8,14 @@
 
 import Foundation
 
-protocol RequestHeader {
+public protocol RequestHeader {
     var name: String { get }
     var content: String { get }
     var rawValue: [String : String] { get }
 }
 
 extension RequestHeader {
-    var rawValue: [String : String] {
+    public var rawValue: [String : String] {
         return [self.name : self.content]
     }
 }
