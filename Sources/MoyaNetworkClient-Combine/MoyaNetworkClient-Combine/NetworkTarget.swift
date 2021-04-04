@@ -29,3 +29,28 @@ public protocol NetworkTarget {
 public extension NetworkTarget {
     var keyPath: String? { nil }
 }
+
+
+// MARK: - Stub response protocols
+
+protocol ServerStubable {
+    var mockBaseUrl: URL { get }
+}
+
+protocol FileStubbable {
+    
+    /// Content this file will be return as response
+    var stubbedFileName: String { get }
+    
+    func stubbedResponse(_ filename: String) -> Data?
+}
+
+extension FileStubbable {
+    
+    func stubbedResponse(_ filename: String) -> Data? {
+        guard let url = Bundle.main.url(forResource: filename, withExtension: "json") else {
+            return nil
+        }
+        return (try? Data(contentsOf: url))
+    }
+}

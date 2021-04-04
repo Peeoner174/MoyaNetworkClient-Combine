@@ -23,6 +23,9 @@ public enum ProviderError: Error {
     // connection
     case connectionError(Error)
     case underlying(Error)
+    
+    // stub
+    case invalidStubFileURI(String)
 }
 
 public extension ProviderError {
@@ -46,6 +49,8 @@ public extension ProviderError {
             return "Failed serialization type: \(type)"
         case .bodyResponseNotContaint(let keyPath):
             return "Response JSON not contain value by key path: \(keyPath)"
+        case .invalidStubFileURI(let fileName):
+            return "Failed find local json file with name \(fileName)"
         }
     }
 }
